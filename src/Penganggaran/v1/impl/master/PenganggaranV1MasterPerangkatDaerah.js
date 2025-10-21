@@ -50,7 +50,7 @@ export class PenganggaranV1MasterPerangkatDaerah extends PenganggaranV1API {
 
 	async sipdUpdateKepalaSKPD(id, nama, nip, pangkat, status) {
 		return await new Promise(async (resolve, reject) => {
-			let unit = await this.findById(id);
+			let unit = await this.sipdFindById(id);
 			let url = `https://sipd-ri.kemendagri.go.id/api/master/skpd/update_skpd`;
 
 			let opt = {};
@@ -106,7 +106,7 @@ export class PenganggaranV1MasterPerangkatDaerah extends PenganggaranV1API {
 
 	async sipdMutakhirkanAdminSKPD(id) {
 		return await new Promise(async (resolve, reject) => {
-			let unit = await this.findById(id);
+			let unit = await this.sipdFindById(id);
 			let url = `https://sipd-ri.kemendagri.go.id/api/master/skpd/update_admin_skpd`;
 
 			let opt = {};

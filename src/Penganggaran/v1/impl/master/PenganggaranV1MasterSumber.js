@@ -45,4 +45,10 @@ export class PenganggaranV1MasterSumber extends PenganggaranV1API {
 		await this.espressoSaveAll(JSON);
 	}
 
+	async downloadAll() {
+		console.log("Download : " + this._title);
+		let JSON = await this.sipdFindAll();
+		this.downloadJSON(this._title + ".json", JSON);
+	}
+
 }
