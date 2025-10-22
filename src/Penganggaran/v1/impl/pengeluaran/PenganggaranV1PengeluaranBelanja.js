@@ -284,4 +284,27 @@ export class PenganggaranV1PengeluaranBelanja extends PenganggaranV1API {
 			}
 		});
 	}
+
+	async sipdDeleteById(id = null) {
+		return await new Promise(async (resolve, reject) => {
+			if (id == null) reject(new Error("ID Belanja cannot be null"));
+
+			let url = `https://sipd-ri.kemendagri.go.id/api/renja/rinci_sub_bl/hapus_rincian`;
+
+			let opt = {};
+			opt.method = "POST";
+			opt.headers = this.requestHeader(opt.method, this.accessToken(), this.apiKey());
+			opt.body = {};
+			opt.body.tahun = this.tahun();
+			opt.body.id_daerah = this.idDaerah();
+			opt.body.id_daerah_log = this.idDaerah();
+			opt.body.id_user_log = this.idUser();
+			opt.body.aktivitas = "delete";
+			opt.body.kunci_bl_rinci = 3;
+			opt.body.id_rinci_sub_bl = id;
+			opt.body = this.requestBody(opt.body);
+
+			fetch(url, opt).then(res => res.json()).then(res => resolve(res.data)).catch(res => reject(res));
+		});
+	}
 }
