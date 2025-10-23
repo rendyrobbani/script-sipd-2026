@@ -307,4 +307,9 @@ export class PenganggaranV1PengeluaranBelanja extends PenganggaranV1API {
 			fetch(url, opt).then(res => res.json()).then(res => resolve(res.data)).catch(res => reject(res));
 		});
 	}
+
+	async sipdDownloadAll(isAnggaran = 1) {
+		let data = await this.sipdFindAll(isAnggaran);
+		this.downloadJSON("penganggaran_pengeluaran_belanja.json", data);
+	}
 }
