@@ -45,4 +45,9 @@ export class PenganggaranV1MasterSubkegiatan extends PenganggaranV1API {
 		await this.espressoSaveAll(JSON);
 	}
 
+	async sipdDownloadAll(isAnggaran = 1) {
+		let data = await this.sipdFindAll();
+		this.downloadJSON("penganggaran_master_subkegiatan.json", data);
+	}
+
 }
