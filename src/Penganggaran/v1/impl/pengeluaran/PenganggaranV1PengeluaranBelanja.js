@@ -101,7 +101,9 @@ export class PenganggaranV1PengeluaranBelanja extends PenganggaranV1API {
 	async sipdFindPenerimaByListIdBelanja(listIdBelanja = []) {
 		return await new Promise(async (resolve, reject) => {
 			try {
-				let step = 0, done = 0, data = [];
+				let step = 0,
+				    done = 0,
+				    data = [];
 
 				for (let i = 0; i < listIdBelanja.length; i++) {
 					let id = listIdBelanja[i];
