@@ -4,7 +4,7 @@ export class PenganggaranV1PengeluaranKeterangan extends PenganggaranV1API {
 
 	constructor() {
 		super();
-		this._title = "data_penganggaran_pengeluaran_keterangan";
+		this._title = "penganggaran_pengeluaran_keterangan";
 	}
 
 	async sipdFindAll(isAnggaran = 1) {

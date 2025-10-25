@@ -4,7 +4,7 @@ export class PenganggaranV1PenerimaanPembiayaanRincian extends PenganggaranV1API
 
 	constructor() {
 		super();
-		this._title = "data_penganggaran_penerimaan_pembiayaan_rincian";
+		this._title = "penganggaran_penerimaan_pembiayaan_rincian";
 	}
 
 	async sipdFindByIdUnit(idUnit) {

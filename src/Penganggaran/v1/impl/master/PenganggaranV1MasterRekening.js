@@ -4,7 +4,7 @@ export class PenganggaranV1MasterRekening extends PenganggaranV1API {
 
 	constructor() {
 		super();
-		this._title = "data_master_rekening";
+		this._title = "penganggaran_master_rekening";
 	}
 
 	async sipdFindAll() {
@@ -45,7 +45,7 @@ export class PenganggaranV1MasterRekening extends PenganggaranV1API {
 		await this.espressoSaveAll(JSON);
 	}
 
-	async downloadAll() {
+	async sipdDownloadAll() {
 		console.log("Download : " + this._title);
 		let JSON = await this.sipdFindAll();
 		this.downloadJSON(this._title + ".json", JSON);

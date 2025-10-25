@@ -4,7 +4,7 @@ export class PenganggaranV1PengeluaranBelanja extends PenganggaranV1API {
 
 	constructor() {
 		super();
-		this._title = "data_penganggaran_pengeluaran_belanja_rincian";
+		this._title = "penganggaran_pengeluaran_belanja_rincian";
 	}
 
 	async sipdFindAll(isAnggaran = 1) {

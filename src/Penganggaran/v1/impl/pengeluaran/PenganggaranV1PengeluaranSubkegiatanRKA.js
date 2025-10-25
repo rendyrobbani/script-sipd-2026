@@ -4,7 +4,7 @@ export class PenganggaranV1PengeluaranSubkegiatanRKA extends PenganggaranV1API {
 
 	constructor() {
 		super();
-		this._title = "data_penganggaran_pengeluaran_subkegiatan_rka";
+		this._title = "penganggaran_pengeluaran_subkegiatan_rka";
 	}
 
 	async sipdFindCurrentJadwal(isAnggaran = 1) {

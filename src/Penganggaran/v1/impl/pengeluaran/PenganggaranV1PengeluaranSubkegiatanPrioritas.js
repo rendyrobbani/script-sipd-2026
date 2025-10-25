@@ -4,7 +4,7 @@ export class PenganggaranV1PengeluaranSubkegiatanPrioritas extends PenganggaranV
 
 	constructor() {
 		super();
-		this._title = "data_penganggaran_pengeluaran_subkegiatan_prioritas";
+		this._title = "penganggaran_pengeluaran_subkegiatan_prioritas";
 	}
 
 	async sipdFindByIdPenganggaranSubkegiatan(idPenganggaranSubkegiatan = null, isAnggaran = 1) {

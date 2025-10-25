@@ -4,7 +4,7 @@ export class PenganggaranV1PengeluaranSubkegiatanRincian extends PenganggaranV1A
 
 	constructor() {
 		super();
-		this._title = "data_penganggaran_pengeluaran_subkegiatan_rincian";
+		this._title = "penganggaran_pengeluaran_subkegiatan_rincian";
 	}
 
 	async sipdFindAll(isAnggaran = 1) {

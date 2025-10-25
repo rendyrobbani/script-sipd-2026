@@ -4,7 +4,7 @@ export class PenganggaranV1MasterKecamatan extends PenganggaranV1API {
 
 	constructor() {
 		super();
-		this._title = "data_master_kecamatan";
+		this._title = "penganggaran_master_kecamatan";
 	}
 
 	async sipdFindAll() {
@@ -39,6 +39,11 @@ export class PenganggaranV1MasterKecamatan extends PenganggaranV1API {
 		console.log("Update : " + this._title);
 		let JSON = await this.sipdFindAll();
 		await this.espressoSaveAll(JSON);
+	}
+
+	async sipdDownloadAll() {
+		let data = await this.sipdFindAll();
+		this.downloadJSON(this._title + ".json", data);
 	}
 
 }

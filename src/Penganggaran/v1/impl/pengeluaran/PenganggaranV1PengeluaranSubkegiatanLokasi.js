@@ -4,7 +4,7 @@ export class PenganggaranV1PengeluaranSubkegiatanLokasi extends PenganggaranV1AP
 
 	constructor() {
 		super();
-		this._title = "data_penganggaran_pengeluaran_subkegiatan_lokasi";
+		this._title = "penganggaran_pengeluaran_subkegiatan_lokasi";
 	}
 
 	async sipdFindByIdPenganggaranSubkegiatan(idPenganggaranSubkegiatan = null, isAnggaran = 1) {

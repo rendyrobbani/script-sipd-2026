@@ -4,7 +4,7 @@ export class PenganggaranV1MasterStandarHarga extends PenganggaranV1API {
 
 	constructor() {
 		super();
-		this._title = "data_master_standar_harga";
+		this._title = "penganggaran_master_standar_harga";
 		this._tipe_ssh = "SSH";
 		this._tipe_hspk = "HSPK";
 		this._tipe_asb = "ASB";
@@ -153,6 +153,11 @@ export class PenganggaranV1MasterStandarHarga extends PenganggaranV1API {
 				reject(e);
 			}
 		});
+	}
+
+	async sipdDownloadAll() {
+		let data = await this.sipdFindAll();
+		this.downloadJSON(this._title + ".json", data);
 	}
 
 }

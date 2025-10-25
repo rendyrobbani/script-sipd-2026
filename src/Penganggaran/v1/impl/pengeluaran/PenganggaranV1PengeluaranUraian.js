@@ -4,7 +4,7 @@ export class PenganggaranV1PengeluaranUraian extends PenganggaranV1API {
 
 	constructor() {
 		super();
-		this._title = "data_penganggaran_pengeluaran_uraian";
+		this._title = "penganggaran_pengeluaran_uraian";
 	}
 
 	async sipdFindAll(isAnggaran = 1) {

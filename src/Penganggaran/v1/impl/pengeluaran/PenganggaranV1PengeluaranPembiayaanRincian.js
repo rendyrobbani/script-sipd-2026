@@ -4,7 +4,7 @@ export class PenganggaranV1PengeluaranPembiayaanRincian extends PenganggaranV1AP
 
 	constructor() {
 		super();
-		this._title = "data_penganggaran_pengeluaran_pembiayaan_rincian";
+		this._title = "penganggaran_pengeluaran_pembiayaan_rincian";
 	}
 
 	async sipdFindByIdUnit(idUnit) {

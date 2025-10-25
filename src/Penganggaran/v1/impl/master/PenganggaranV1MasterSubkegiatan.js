@@ -4,7 +4,7 @@ export class PenganggaranV1MasterSubkegiatan extends PenganggaranV1API {
 
 	constructor() {
 		super();
-		this._title = "data_master_subkegiatan";
+		this._title = "penganggaran_master_subkegiatan";
 	}
 
 	async sipdFindAll() {
@@ -45,9 +45,9 @@ export class PenganggaranV1MasterSubkegiatan extends PenganggaranV1API {
 		await this.espressoSaveAll(JSON);
 	}
 
-	async sipdDownloadAll(isAnggaran = 1) {
+	async sipdDownloadAll() {
 		let data = await this.sipdFindAll();
-		this.downloadJSON("penganggaran_master_subkegiatan.json", data);
+		this.downloadJSON(this._title + ".json", data);
 	}
 
 }

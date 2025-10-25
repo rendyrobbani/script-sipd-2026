@@ -4,7 +4,7 @@ export class PenganggaranV1PengeluaranSubkegiatan extends PenganggaranV1API {
 
 	constructor() {
 		super();
-		this._title = "data_penganggaran_pengeluaran_subkegiatan";
+		this._title = "penganggaran_pengeluaran_subkegiatan";
 	}
 
 	async sipdFindByIdUnit(idUnit = null, isAnggaran = 1) {
@@ -137,17 +137,18 @@ export class PenganggaranV1PengeluaranSubkegiatan extends PenganggaranV1API {
 			try {
 				let step = 0, done = 0, data = [];
 
-				let units = await window.penganggaranMasterPerangkatDaerah.espressoSelectAll(0);
-				for (let i = 0; i < units.length; i++) {
-					let idUnit = units[i].id;
-
-					step++;
-					this.sipdFindByIdUnit(idUnit, isAnggaran).then(JSON => {
-						for (let j = 0; j < JSON.length; j++) data.push(JSON[j]);
-						done++;
-					}).catch(() => {
-						done++;
-					});
+				let listSKPD = await penganggaranMasterPerangkatDaerah.sipdFindAll();
+				for (let i = 0; i < listSKPD.length; i++) {
+					let skpd = listSKPD[i];
+					if (skpd.is_skpd) {
+						step++;
+						this.sipdFindByIdUnit(skpd.id_skpd, isAnggaran).then(JSON => {
+							for (let j = 0; j < JSON.length; j++) data.push(JSON[j]);
+							done++;
+						}).catch(() => {
+							done++;
+						});
+					}
 				}
 
 				let wait = setInterval(() => {
@@ -182,6 +183,11 @@ export class PenganggaranV1PengeluaranSubkegiatan extends PenganggaranV1API {
 		console.log("Update : " + this._title);
 		let JSON = await this.sipdFindAll(isAnggaran);
 		await this.espressoSaveAll(JSON);
+	}
+
+	async sipdDownloadAll(isAnggaran = 1) {
+		let data = await this.sipdFindAll(isAnggaran);
+		this.downloadJSON(this._title + ".json", data);
 	}
 
 }

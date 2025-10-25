@@ -4,7 +4,7 @@ export class PenganggaranV1PenerimaanPendapatanRincian extends PenganggaranV1API
 
 	constructor() {
 		super();
-		this._title = "data_penganggaran_penerimaan_pendapatan_rincian";
+		this._title = "penganggaran_penerimaan_pendapatan_rincian";
 	}
 
 	async sipdFindByIdUnit(idUnit) {
@@ -73,6 +73,40 @@ export class PenganggaranV1PenerimaanPendapatanRincian extends PenganggaranV1API
 		console.log("Update : " + this._title);
 		let JSON = await this.sipdFindAll();
 		await this.espressoSaveAll(JSON);
+	}
+
+	async sipdInsert(idUnit, idRekening, kodeRekening, namaRekening, uraian, keterangan, total) {
+		return await new Promise(async (resolve, reject) => {
+			if (idUnit == null) reject(new Error("ID Unit cannot be null"));
+			if (idRekening == null) reject(new Error("ID Rekening cannot be null"));
+			if (kodeRekening == null) reject(new Error("Kode Rekening cannot be null"));
+			if (namaRekening == null) reject(new Error("Nama Rekening cannot be null"));
+			if (uraian == null) reject(new Error("Uraian cannot be null"));
+			if (keterangan == null) reject(new Error("Keterangan cannot be null"));
+			if (total == null) reject(new Error("Total cannot be null"));
+
+			let url = `https://sipd-ri.kemendagri.go.id/api/renja/pendapatan/add`;
+
+			let opt = {};
+			opt.method = "POST";
+			opt.headers = this.requestHeader(opt.method, this.accessToken(), this.apiKey());
+			opt.body = {};
+			opt.body.tahun = this.tahun();
+			opt.body.id_daerah = this.idDaerah();
+			opt.body.id_daerah_log = this.idDaerah();
+			opt.body.id_user_log = this.idUser();
+			opt.body.created_user = this.idUser();
+			opt.body.id_unit = idUnit;
+			opt.body.id_akun = idRekening;
+			opt.body.kode_akun = kodeRekening;
+			opt.body.nama_akun = namaRekening;
+			opt.body.uraian = uraian;
+			opt.body.keterangan = keterangan;
+			opt.body.total = total;
+			opt.body = this.requestBody(opt.body);
+
+			fetch(url, opt).then(res => res.json()).then(res => resolve(res)).catch(res => reject(res));
+		});
 	}
 
 }
