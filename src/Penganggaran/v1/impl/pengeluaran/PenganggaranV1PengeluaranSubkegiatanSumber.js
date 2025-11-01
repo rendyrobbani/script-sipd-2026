@@ -35,7 +35,9 @@ export class PenganggaranV1PengeluaranSubkegiatanSumber extends PenganggaranV1AP
 	async sipdFindByListIdPenganggaranSubkegiatan(listIdPenganggaranSubkegiatan = [], isAnggaran = 1) {
 		return await new Promise(async (resolve, reject) => {
 			try {
-				let step = 0, done = 0, data = [];
+				let step = 0,
+				    done = 0,
+				    data = [];
 
 				for (let i = 0; i < listIdPenganggaranSubkegiatan.length; i++) {
 					let id = listIdPenganggaranSubkegiatan[i];
@@ -102,6 +104,47 @@ export class PenganggaranV1PengeluaranSubkegiatanSumber extends PenganggaranV1AP
 		console.log("Update : " + this._title);
 		let JSON = await this.sipdFindAll(isAnggaran);
 		await this.espressoSaveAll(JSON);
+	}
+
+	async sipdDelete(idPenganggaranSubkegiatan = null, idPenganggaranSumber = null, idSumber = null, isAnggaran = 1) {
+		return await new Promise(async (resolve, reject) => {
+
+			if (idPenganggaranSubkegiatan == null) reject(new Error("ID Penganggaran Subkegiatan cannot be null"));
+			if (idPenganggaranSumber == null) reject(new Error("ID Penganggaran Sumber cannot be null"));
+			if (idSumber == null) reject(new Error("ID Sumber cannot be null"));
+
+			let url = `https://sipd-ri.kemendagri.go.id/api/renja/dana_sub_bl/delete`;
+
+			let opt = {};
+			opt.method = "POST";
+			opt.headers = this.requestHeader(opt.method, this.accessToken(), this.apiKey());
+			opt.body = {};
+			opt.body.tahun = this.tahun();
+			opt.body.id_daerah = this.idDaerah();
+			opt.body.id_daerah_log = this.idDaerah();
+			opt.body.id_user_log = this.idUser();
+			opt.body.id_sub_bl = idPenganggaranSubkegiatan;
+			opt.body.id_dana_sub_bl = idPenganggaranSumber;
+			opt.body.id_dana = idSumber;
+			opt.body.is_anggaran = isAnggaran;
+			opt.body = this.requestBody(opt.body);
+
+			fetch(url, opt).then(res => res.json()).then(res => resolve(res)).catch(res => reject(res));
+		});
+	}
+
+	async sipdDeleteByIdPenganggaranSubkegiatanAndIdSumber(idPenganggaranSubkegiatan = null, idSumber = null, isAnggaran = 1) {
+		return await new Promise(async (resolve, reject) => {
+			try {
+				let listSumber = await this.sipdFindByIdPenganggaranSubkegiatan(idPenganggaranSubkegiatan, isAnggaran);
+				for (let i = 0; i < listSumber.length; i++) {
+					let dataSumber = listSumber[i];
+					if (dataSumber.id_dana === idSumber) await this.sipdDelete(idPenganggaranSubkegiatan, dataSumber.id_dana_sub_bl, idSumber, isAnggaran);
+				}
+				resolve({});
+			} catch (error) {
+			}
+		});
 	}
 
 }
